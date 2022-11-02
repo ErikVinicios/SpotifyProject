@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "4cfe0c52-84af-4f29-8e02-61fc3d294d8e": {
+      "ProjectGuid": "4cfe0c52-84af-4f29-8e02-61fc3d294d8e",
+      "DisplayName": "SpotifyProject",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
