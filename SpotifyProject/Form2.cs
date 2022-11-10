@@ -14,17 +14,10 @@ namespace SpotifyProject
 {
     public partial class SignUp : Form
     {
-        MySqlConnection conn;
-        MySqlCommand cmd;
-        MySqlDataReader dr;
-
-        private string dataSource ="datasource=localhost;username=root;password=;database=Spotify";
-
+        User user = new User();
         public SignUp()
         {
             InitializeComponent();
-
-            conn = new MySqlConnection(dataSource);
         }
 
         private void btCreate_Click(object sender, EventArgs e)
@@ -40,32 +33,12 @@ namespace SpotifyProject
                 MessageBox.Show("Some field is incorrect", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            try
+            if (tbUsername.Text == user.Username && tbEmail.Text == user.Email && tbUsername.Text == user.Username)
             {
-                cmd = new MySqlCommand("INSERT INTO User (Username, Email, Password) VALUES (@Username, @Email, @Password)", conn);
-     
-                cmd.Parameters.AddWithValue("@Username", tbUsername.Text);
-                cmd.Parameters.AddWithValue("@Email", tbEmail.Text);
-                cmd.Parameters.AddWithValue("@Password", tbPassword.Text);
-
-                conn.Open();
-
-                cmd.ExecuteNonQuery();
-
-                MessageBox.Show("User Created successfully! ", "Congratulations",MessageBoxButtons.OK,MessageBoxIcon.Information);
-
+                SQLCommands.Create(user.Username, user.Email, user.Password);
                 SignIn signIn = new SignIn();
                 signIn.Show();
                 this.Visible = false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);           
-            }
-            finally
-            {
-                conn.Close();
             }
         }
 
@@ -168,82 +141,34 @@ namespace SpotifyProject
         private void tbUsername_TextChanged(object sender, EventArgs e)
         {
             lbInvUsername.Visible = false;
-
             if (tbUsername.Text.Length < 8)
             {
                 lbInvUsername.Visible = true;
                 lbInvUsername.Text = "* Very short username";
                 return;
             }
-
-            try
+            if (user.UserameIsValid(tbUsername.Text) == false)
             {
-                cmd = new MySqlCommand("SELECT Username FROM User", conn);
-
-                conn.Open();
-
-                dr = cmd.ExecuteReader();
-
-                while (dr.Read())
-                {
-                    if (dr["Username"].ToString() == tbUsername.Text)
-                    {
-                        lbInvUsername.Visible = true;
-                        lbInvUsername.Text = "* Username in use";
-                        tbUsername.ForeColor = Color.Red;
-                        return;
-                    }
-                    lbInvUsername.Visible = false;
-                    tbUsername.ForeColor = Color.Black;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                conn.Close();
+                lbInvUsername.Visible = true;
+                lbInvUsername.Text = "* Username in use";
+                return;
             }
         }
 
         private void tbEmail_TextChanged(object sender, EventArgs e)
         {
+            lbInvEmail.Visible = false;
             if (Validations.EmailIsValid(tbEmail.Text) == false)
             {
                 lbInvEmail.Visible = true;
                 lbInvEmail.Text = "* Invalid email";
                 return;
             }
-
-            try
+            if (user.EmailIsValid(tbEmail.Text) == false)
             {
-                cmd = new MySqlCommand("SELECT Email FROM User", conn);
-
-                conn.Open();
-
-                dr = cmd.ExecuteReader();
-
-                while (dr.Read())
-                {
-                    if (dr["Email"].ToString() == tbEmail.Text)
-                    {
-                        lbInvEmail.Visible = true;
-                        lbInvEmail.Text = "* Email in use";
-                        tbEmail.ForeColor = Color.Red;
-                        return;
-                    }
-                    lbInvEmail.Visible = false;
-                    tbEmail.ForeColor = Color.Black;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                conn.Close();
+                lbInvEmail.Visible = true;
+                lbInvEmail.Text = "* Email in use";
+                return;
             }
         }
 
