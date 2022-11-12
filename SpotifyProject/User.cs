@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,15 +16,15 @@ namespace SpotifyProject
         public string Username { get { return username; } set { username = value; } }
         public string Email { get { return email; } set { email = value; } }
         public string Password { get { return password; } set { password = value; } }
-        public bool UserameIsValid(string name)
+        public bool UsernameIsValid(string userame)
         {
             MySqlDataReader dr = SQLCommands.Read();
             while (dr.Read())
             {
-                if (dr["Name"].ToString() == name)
+                if (dr["Username"].ToString() == userame)
                     return false;
             }
-            Username = name;
+            Username = userame;
             return true;
         }
         public bool EmailIsValid(string email)
@@ -38,6 +39,29 @@ namespace SpotifyProject
             }
             Email = email;
             return true;
+        }
+        public string PasswordForce(string password)
+        {
+            if (password.Length < 8)
+            {
+                return "Shot";
+            }
+
+            if (Validations.StrongPassword(password))
+            {
+                Password = password;
+                return "Strong";
+            }
+            else if (Validations.AveragePassword(password))
+            {
+                Password = password;
+                return "Average";
+            }
+            else
+            {
+                Password = password;
+                return "Weak";
+            }
         }
     }
 }

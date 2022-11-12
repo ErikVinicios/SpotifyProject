@@ -8,18 +8,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using MySql.Data.MySqlClient;
-
 namespace SpotifyProject
 {
-    public partial class SignUp : Form
+    public partial class ucSIgnUp : UserControl
     {
         User user = new User();
-        public SignUp()
+        public ucSIgnUp()
         {
             InitializeComponent();
         }
-
+        private void close()
+        {
+            this.Parent.Controls.Remove(this);
+        }
         private void btCreate_Click(object sender, EventArgs e)
         {
             if (tbUsername.ForeColor == Color.DarkGray || tbEmail.ForeColor == Color.DarkGray || tbPassword.ForeColor == Color.DarkGray || tbConfPassword.ForeColor == Color.DarkGray)
@@ -36,19 +37,13 @@ namespace SpotifyProject
             if (tbUsername.Text == user.Username && tbEmail.Text == user.Email && tbUsername.Text == user.Username)
             {
                 SQLCommands.Create(user.Username, user.Email, user.Password);
-                SignIn signIn = new SignIn();
-                signIn.Show();
-                this.Visible = false;
+                close();
             }
         }
-
-        private void btCSignIn_Click(object sender, EventArgs e)
+        private void btSignIn_Click(object sender, EventArgs e)
         {
-            SignIn signin = new SignIn();
-            signin.Show();
-            this.Visible = false;
+            close();
         }
-
         private void tbUsername_Enter(object sender, EventArgs e)
         {
             if (tbUsername.ForeColor == Color.DarkGray)
@@ -58,7 +53,6 @@ namespace SpotifyProject
                 return;
             }
         }
-
         private void tbUsername_Leave(object sender, EventArgs e)
         {
             if (tbUsername.Text == "")
@@ -69,7 +63,6 @@ namespace SpotifyProject
                 return;
             }
         }
-
         private void tbEmail_Enter(object sender, EventArgs e)
         {
             if (tbEmail.ForeColor == Color.DarkGray)
@@ -79,7 +72,6 @@ namespace SpotifyProject
                 return;
             }
         }
-
         private void tbEmail_Leave(object sender, EventArgs e)
         {
             if (tbEmail.Text == "")
@@ -90,7 +82,6 @@ namespace SpotifyProject
                 return;
             }
         }
-
         private void tbPassword_Enter(object sender, EventArgs e)
         {
             if (tbPassword.ForeColor == Color.DarkGray)
@@ -101,7 +92,6 @@ namespace SpotifyProject
                 return;
             }
         }
-
         private void tbPassword_Leave(object sender, EventArgs e)
         {
             if (tbPassword.Text == "")
@@ -114,7 +104,6 @@ namespace SpotifyProject
                 return;
             }
         }
-
         private void tbConfPassword_Enter(object sender, EventArgs e)
         {
             if (tbConfPassword.ForeColor == Color.DarkGray)
@@ -125,7 +114,6 @@ namespace SpotifyProject
                 return;
             }
         }
-
         private void tbConfPassword_Leave(object sender, EventArgs e)
         {
             if (tbConfPassword.Text == "")
@@ -137,7 +125,6 @@ namespace SpotifyProject
                 return;
             }
         }
-
         private void tbUsername_TextChanged(object sender, EventArgs e)
         {
             lbInvUsername.Visible = false;
@@ -147,14 +134,13 @@ namespace SpotifyProject
                 lbInvUsername.Text = "* Very short username";
                 return;
             }
-            if (user.UserameIsValid(tbUsername.Text) == false)
+            if (user.UsernameIsValid(tbUsername.Text) == false)
             {
                 lbInvUsername.Visible = true;
                 lbInvUsername.Text = "* Username in use";
                 return;
             }
         }
-
         private void tbEmail_TextChanged(object sender, EventArgs e)
         {
             lbInvEmail.Visible = false;
@@ -171,28 +157,22 @@ namespace SpotifyProject
                 return;
             }
         }
-
         private void tbPassword_TextChanged(object sender, EventArgs e)
         {
+            string PasswordForce = user.PasswordForce(tbPassword.Text);
             lbConfPassword.Visible = false;
             lbInvPassword.Visible = false;
             lbPasswordForce.Visible = false;
             tbPassword.ForeColor = Color.Black;
 
-            if (tbPassword.Text != tbConfPassword.Text && tbConfPassword.ForeColor != Color.DarkGray)
-            {
-                lbConfPassword.Visible = true;
-                lbConfPassword.Text = "* Different password";
-            }
-
-            if (tbPassword.Text.Length < 8)
+            if (PasswordForce == "Shot")
             {
                 lbInvPassword.Visible = true;
                 lbInvPassword.Text = "* Very short password";
                 return;
             }
 
-            if (Validations.StrongPassword(tbPassword.Text))
+            else if (PasswordForce == "Strong")
             {
                 tbPassword.ForeColor = Color.Green;
                 lbPasswordForce.Visible = true;
@@ -200,7 +180,7 @@ namespace SpotifyProject
                 lbPasswordForce.Text = "Strong password";
                 return;
             }
-            else if (Validations.AveragePassword(tbPassword.Text))
+            else if (PasswordForce == "Average")
             {
                 tbPassword.ForeColor = Color.Orange;
                 lbPasswordForce.Visible = true;
@@ -217,7 +197,6 @@ namespace SpotifyProject
                 return;
             }
         }
-
         private void tbConfPassword_TextChanged(object sender, EventArgs e)
         {
             lbConfPassword.Visible = false;
@@ -249,7 +228,6 @@ namespace SpotifyProject
                 }
             }
         }
-
         private void cbShowPassword_CheckedChanged(object sender, EventArgs e)
         {
             if (tbPassword.ForeColor != Color.DarkGray && tbConfPassword.ForeColor != Color.DarkGray)

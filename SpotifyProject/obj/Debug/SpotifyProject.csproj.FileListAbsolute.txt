@@ -157,8 +157,6 @@ C:\Users\Erik Santos\Desktop\projetos\SpotifyProject\SpotifyProject\bin\Debug\Sy
 C:\Users\Erik Santos\Desktop\projetos\SpotifyProject\SpotifyProject\obj\Debug\SpotifyProject.csproj.AssemblyReference.cache
 C:\Users\Erik Santos\Desktop\projetos\SpotifyProject\SpotifyProject\obj\Debug\SpotifyProject.csproj.SuggestedBindingRedirects.cache
 C:\Users\Erik Santos\Desktop\projetos\SpotifyProject\SpotifyProject\obj\Debug\SpotifyProject.SignIn.resources
-C:\Users\Erik Santos\Desktop\projetos\SpotifyProject\SpotifyProject\obj\Debug\SpotifyProject.SignUp.resources
-C:\Users\Erik Santos\Desktop\projetos\SpotifyProject\SpotifyProject\obj\Debug\SpotifyProject.Spotify.resources
 C:\Users\Erik Santos\Desktop\projetos\SpotifyProject\SpotifyProject\obj\Debug\SpotifyProject.Properties.Resources.resources
 C:\Users\Erik Santos\Desktop\projetos\SpotifyProject\SpotifyProject\obj\Debug\SpotifyProject.SignIn.aa.resources
 C:\Users\Erik Santos\Desktop\projetos\SpotifyProject\SpotifyProject\obj\Debug\SpotifyProject.csproj.GenerateResource.cache
@@ -167,3 +165,4 @@ C:\Users\Erik Santos\Desktop\projetos\SpotifyProject\SpotifyProject\obj\Debug\aa
 C:\Users\Erik Santos\Desktop\projetos\SpotifyProject\SpotifyProject\obj\Debug\SpotifyProject.csproj.CopyComplete
 C:\Users\Erik Santos\Desktop\projetos\SpotifyProject\SpotifyProject\obj\Debug\SpotifyProject.exe
 C:\Users\Erik Santos\Desktop\projetos\SpotifyProject\SpotifyProject\obj\Debug\SpotifyProject.pdb
+C:\Users\Erik Santos\Desktop\projetos\SpotifyProject\SpotifyProject\obj\Debug\SpotifyProject.ucSIgnUp.resources

@@ -20,9 +20,10 @@ namespace SpotifyProject
                 conn = new MySqlConnection(dataSource);
                 conn.Open();
 	        }
-	        catch (global::System.Exception)
+	        catch (global::System.Exception ex)
 	        {
                 MessageBox.Show("Connection Fail", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw ex;
 	        }
         }
         private static void closeConnection()
@@ -42,16 +43,9 @@ namespace SpotifyProject
         }
         public static MySqlDataReader Read()
         {
-            try
-            {
-                openConnection();
-                cmd = new MySqlCommand("SELECT * FROM User", conn);
-                return cmd.ExecuteReader();
-            }
-            finally
-            {
-                closeConnection();
-            }      
+            openConnection();
+            cmd = new MySqlCommand("SELECT * FROM User", conn);
+            return cmd.ExecuteReader();
         }
     }
 }

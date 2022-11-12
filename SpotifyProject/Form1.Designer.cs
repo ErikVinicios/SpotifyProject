@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SignIn));
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.pbLogo = new System.Windows.Forms.PictureBox();
             this.btSignUp = new System.Windows.Forms.Button();
             this.tbUsername = new System.Windows.Forms.TextBox();
@@ -38,8 +40,15 @@
             this.btForgPassword = new System.Windows.Forms.Button();
             this.lbInvUsername = new System.Windows.Forms.Label();
             this.lbInvPassword = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             // 
             // pbLogo
             // 
@@ -111,30 +120,40 @@
             this.lbInvPassword.ForeColor = System.Drawing.Color.Red;
             this.lbInvPassword.Name = "lbInvPassword";
             // 
+            // panel1
+            // 
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.BackColor = System.Drawing.Color.Black;
+            this.panel1.Controls.Add(this.lbInvPassword);
+            this.panel1.Controls.Add(this.tbUsername);
+            this.panel1.Controls.Add(this.lbInvUsername);
+            this.panel1.Controls.Add(this.btForgPassword);
+            this.panel1.Controls.Add(this.btSignUp);
+            this.panel1.Controls.Add(this.btSignIn);
+            this.panel1.Controls.Add(this.tbPassword);
+            this.panel1.Controls.Add(this.cbShowPassword);
+            this.panel1.Controls.Add(this.pbLogo);
+            this.panel1.Name = "panel1";
+            // 
             // SignIn
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.Controls.Add(this.lbInvPassword);
-            this.Controls.Add(this.lbInvUsername);
-            this.Controls.Add(this.btForgPassword);
-            this.Controls.Add(this.btSignIn);
-            this.Controls.Add(this.cbShowPassword);
-            this.Controls.Add(this.tbPassword);
-            this.Controls.Add(this.tbUsername);
-            this.Controls.Add(this.btSignUp);
-            this.Controls.Add(this.pbLogo);
+            this.Controls.Add(this.panel1);
+            this.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.MaximizeBox = false;
             this.Name = "SignIn";
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.PictureBox pbLogo;
         private System.Windows.Forms.Button btSignUp;
         private System.Windows.Forms.TextBox tbUsername;
@@ -144,6 +163,7 @@
         private System.Windows.Forms.Button btForgPassword;
         private System.Windows.Forms.Label lbInvUsername;
         private System.Windows.Forms.Label lbInvPassword;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
